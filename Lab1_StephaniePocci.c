@@ -15,7 +15,7 @@ int main()
   {
     //converting from fahreneit to celsius
     celsius = 5.0 * (fahr-32.0) / 9.0;
-    fahr = celsius * (9.0/5.0) + 32;
+    //fahr = celsius * (9.0/5.0) + 32;
     printf("%3.0f %6.1f\n", fahr, celsius); //%d assumes base 10
     //3.0f - print at least 3 characters wide with no decimal
     //6.1f - print at least 6 characters wide with 1 digit after the decimal
