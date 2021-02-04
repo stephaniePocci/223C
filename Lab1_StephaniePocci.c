@@ -9,21 +9,32 @@ int main()
   float fahr, celsius;
   fahr = 0;
   celsius = 0;
-  fahr = LOWER;
+  celsius = LOWER;
+  int i = 0;
 
-  while(fahr <= UPPER)
+  for(i = 0; i <= UPPER; ++i){
+    //celsius = 5.0 * (fahr-32.0) / 9.0;
+    fahr = celsius * (9.0/5.0) + 32;
+    printf("%3.0f %6.1f\n", celsius, fahr);
+    celsius += STEPP;
+  }
+/*
+  while(celsius <= UPPER)
   {
     //converting from fahreneit to celsius
     celsius = 5.0 * (fahr-32.0) / 9.0;
-    //fahr = celsius * (9.0/5.0) + 32;
-    printf("%3.0f %6.1f\n", fahr, celsius); //%d assumes base 10
+    fahr = celsius * (9.0/5.0) + 32;
+    printf("%3.0f %6.1f\n", celsius, fahr); //%d assumes base 10
     //3.0f - print at least 3 characters wide with no decimal
     //6.1f - print at least 6 characters wide with 1 digit after the decimal
 
     //increase our tempature by 20
-    fahr = fahr + STEPP;
+    celsius = celsius + STEPP;
   }
-
+*/
 
   return 0;
 }
+//%f for float
+//%d for print
+//%i
