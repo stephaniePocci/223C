@@ -2,7 +2,7 @@
 
 int main()
 {
-  //char c;
+  char c;
 
   //scanf("%c", &c);
   //printf("The char entered is: %c\n", c);
@@ -19,11 +19,10 @@ int main()
 
   char str[20];
   int i;
-  for(i = 0; i<2; i++)
-  {
+  for(i = 0; i<2; i++) {
     scanf("%[^\n]s", str); //not ignoring white space! reading until \n
     printf("%s\n", str);
-    while((getchar()) != '\n');
+    while((getchar()) != '\n'); //same as cin.ignore()
   }
 
 //fgets
