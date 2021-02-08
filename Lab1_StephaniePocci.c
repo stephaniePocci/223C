@@ -12,6 +12,9 @@ int main()
   celsius = LOWER;
   int i = 0;
 
+  printf("Conversion Table: Celsius to Fahrenheit\n");
+  printf("---------------------------------------\n");
+
   for(i = 0; i <= UPPER; ++i){
     //celsius = 5.0 * (fahr-32.0) / 9.0;
     fahr = celsius * (9.0/5.0) + 32;
