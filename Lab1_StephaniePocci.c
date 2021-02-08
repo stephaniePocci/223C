@@ -15,11 +15,10 @@ int main()
   printf("Conversion Table: Celsius to Fahrenheit\n");
   printf("---------------------------------------\n");
 
-  for(i = 0; i <= UPPER; ++i){
+  for(celsius = LOWER; celsius <= UPPER; celsius += STEPP){
     //celsius = 5.0 * (fahr-32.0) / 9.0;
     fahr = celsius * (9.0/5.0) + 32;
     printf("%3.0f %6.1f\n", celsius, fahr);
-    celsius += STEPP;
   }
 /*
   while(celsius <= UPPER)
