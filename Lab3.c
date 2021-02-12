@@ -8,7 +8,7 @@
 int main()
 {
 int nl, nw, nc, state;
-state = IN;
+state = OUT;
 nw = nc = 0;
 nl = 1;
 //char word[9];
@@ -18,6 +18,18 @@ int arrayCharCount[10] = {0, 0, 0, 0, 0, 0, 0 , 0, 0, 0};
 
 printf("Enter a word or phrase (type q to quit): \n");
 
+while((c = getchar()) != 'q') {
+  if(state == IN){
+    nc++;
+  } if(c == ' ' || c == '\n' || c == '\t') {
+    arrayCharCount[nc - 1]++;
+    state = OUT;
+    nc = 0;
+  } else if(state == OUT) {
+    state = IN;
+  }
+}
+/*
   while((c = getchar()) != 'q')
   {
     if((c != ' ' && c != '\n' && c != '\t')) {
@@ -36,6 +48,7 @@ printf("Enter a word or phrase (type q to quit): \n");
       arrayCharCount[nw] = nc + 1; //comp for getchar less than 1
     } else { arrayCharCount[nw] = nc; }
   }
+*/
 
 for(i = 0; i < 10; i++) {
   printf("%d: ", (i+1));
