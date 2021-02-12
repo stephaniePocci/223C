@@ -14,7 +14,7 @@ nl = 1;
 //char word[9];
 
 int c, i, j;
-int arrayCharCount[10] = {0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0};
+int arrayCharCount[10] = {0, 0, 0, 0, 0, 0, 0 , 0, 0, 0};
 
 printf("Enter a word or phrase (type q to quit): \n");
 
