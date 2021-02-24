@@ -5,10 +5,20 @@ Part 2 - Make a function to copy one array into another
 Part 1 - Feel free to use getline function with copy function &
 Write a program that reads 3 lines of input, and prints the longest line
 */
+
+void strcopy2(char bufferOriginal[], char bufferBiggest[]) {
+  int i = 0;
+  int buffSize = 32;
+  for(i = 0; i < buffSize; i++) {
+    bufferBiggest[i] = bufferOriginal[i]; //stores original string in new string "bufferBiggest"
+  }
+}
+
 int main() {
   char buffer[32];
   char buffer2[32];
   char buffer3[32];
+  char bufferBiggest[32];
   char *buff = buffer;
   char *buff2 = buffer2;
   char *buff3 = buffer3;
@@ -25,31 +35,19 @@ int main() {
   array3 = getline(&buff3, &buffSize, stdin);
 
   if(array1 > array2 && array1 > array3) {
-    strcopy2(char buffer[]);
+    strcopy2(buffer, bufferBiggest);
+    printf("The largest line is: %s", bufferBiggest);
   }
 
   if(array2 > array3 && array2 > array1) {
-    strcopy2(char buffer2[]);
+    strcopy2(buffer2, bufferBiggest);
+    printf("The largest line is: %s", bufferBiggest);
   }
 
   if(array3 > array2 && array3 > array1) {
-    strcopy2(char buffer3[]);
+    strcopy2(buffer3, bufferBiggest);
+    printf("The largest line is: %s", bufferBiggest);
   }
-
+printf("Checking it stored correctly in new array:\n %s", bufferBiggest);
   return 0;
-}
-
-void strcopy2(char bufferOriginal[], char bufferBiggest[]) {
-  int i = 0;
-  int buffSize = 32;
-//   int j = 0;
-  for(i = 0; i < buffSize; i++) {
-    bufferBiggest[i] = bufferOriginal[i];
-  }
-  printf("The largest line is: %s", bufferBiggest);
-/*  while(bufferOriginal[i] != '\0'){
-    i++;
-  }
-  while((bufferOriginal[i++] = bufferBiggest[j++]) != '\0');
-*/
 }
