@@ -10,11 +10,9 @@
 char pattern[] = "ould"; //term to search for
 
 // getline get a line store it in s - return the size of the read line
-int getline2(char s[], int lim)
-{
+int getline2(char s[], int lim) {
   int c, i; //c is char , i is the counters
-  for(i = 0; i < lim-1 && (c = getchar()) != '\n'; ++i)
-  {
+  for(i = 0; i < lim-1 && (c = getchar()) != '\n'; ++i) {
     s[i] = c;//write char to s
     //input - hello\n
     //s[] = hello\0
@@ -29,8 +27,8 @@ int getline2(char s[], int lim)
 int strindex(char s[], char t[]) {//s input, t term
   int i, j, k;
 
-  for(i = strlen(s)-1; s[i] != '\0'; i--) {//search the array and keeps our place!
-    for(j = i, k = strlen(t); t[k] !=0 && s[j] == t[k]; j-- , k--);//j searches where we are starting with i in s, k searches t
+  for(i = strlen(s) - 1; s[i] !=0; i--) {//search the array and keeps our place!
+    for(j = i, k = strlen(t); t[k] !=0 && s[j] == t[k]; j--, k--);//j searches where we are starting with i in s, k searches t
    //search for a match!!!
     if(t[k] == 0) {
       return j + 1;
@@ -51,8 +49,6 @@ int main()
       printf("%s\n", line);
       printf("The right most index for the line %s is %i.\n", line, strindex(line,pattern));
     }
-    printf("%s\n", line);
   }
-
   return 0;
 }
