@@ -60,6 +60,14 @@ int illegalMove(char arr[3][3], int row, int col){
   return bool;
 }
 
+
+//checks if there is a winner for the game
+// 1 = there is a winner/ 2 = no winner yet
+int winCheck(int playerTurn, char arr[3][3]) {
+  int bool = 2;
+  return bool;
+}
+
 int main() {
   int playerTurn = 1;
   int row,col;
@@ -69,23 +77,26 @@ int main() {
   printf("======================\n");
   display(playerTurn, arr); //displays current board
 
-  printf("Which Row would you like?\n");
-  scanf("%d", &row);
-  printf("Which Col would you like?\n");
-  scanf("%d", &col);
+//  while(winCheck(playerTurn, arr) != 1) {
+    printf("Which Row would you like?\n");
+    scanf("%d", &row);
+    printf("Which Col would you like?\n");
+    scanf("%d", &col);
 
-  if(illegalMove(arr, row, col) != 1) { //checks first if spot is already taken
-    if(playerTurn == 1) {
-      arr[row][col] = 'X';
-    } else if(playerTurn == 2) {
-      arr[row][col] = 'O';
+    if(illegalMove(arr, row, col) != 1) { //checks first if spot is already taken
+      if(playerTurn == 1) {
+        arr[row][col] = 'X';
+      } else if(playerTurn == 2) {
+        arr[row][col] = 'O';
+      }
+    } else {
+      printf("Illegal Move.\n");
+      //continue;
     }
-  } else {
-    printf("Illegal Move.");
-  }
-  // arr = playerMove(playerTurn, arr, row, col);
-  playerTurn = changeTurn(playerTurn);
-  display(playerTurn, arr);
+
+    playerTurn = changeTurn(playerTurn);
+    display(playerTurn, arr);
+//  }
 
   return 0;
 }
