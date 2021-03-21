@@ -13,10 +13,10 @@ Initialize array to char of "blank space"
 
 P1 & P2 should use same code
 */
-char array[3][3] = {"O","O","O","O","O","O","O","O","O"}; //Declaring 2D array for new game
+char array[3][3];//Declaring 2D array for new game
 
 void gameBoard() {
-  printf("%s | %s | %s", array[0][0], &array[0][1], &array[0][2]);
+  printf("%ct | %ct | %ct", array[0][0], &array[0][1], &array[0][2]);
 }
 
 int main() {
