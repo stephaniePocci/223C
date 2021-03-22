@@ -20,20 +20,31 @@ P1 & P2 should use same code
 //   char arr[3][3] = {{'X',' ',' '},{' ',' ',' '},{' ',' ',' '}}; //Declaring 2D array for new game
 // }
 
-
-//function to display current board
-void display(int playerTurn) {
+void displayPlayerTurn(int playerTurn) {
   if(playerTurn == 1) {
     printf("Player %d turn 'X'\n", playerTurn);
   } else if(playerTurn == 2) {
     printf("Player %d turn 'O'\n", playerTurn);
   }
-  fflush(stdout);
-  printf("%s|%s|%s\n", &arr[0][0], &arr[0][1], &arr[0][2]);
-  printf("-------------\n");
-  printf("%s|%s|%s\n", &arr[1][0], &arr[1][1], &arr[1][2]);
-  printf("-------------\n");
-  printf("%s|%s|%s\n", &arr[2][0], &arr[2][1], &arr[2][2]);
+}
+
+//function to display current board
+void display() {
+  for(int i = 0; i < 3; i++) {
+    for(int j = 0; j < 3; j++) {
+      printf("%c", arr[i][j]);
+      if(j != 2) {
+        printf("|");
+      }
+    }
+    printf("\n");
+    if(i != 2) {
+      for(int j = 0; j < 5; j++) {
+        printf("-");
+      }
+      printf("\n");
+    }
+  }
 
 }
 
@@ -68,90 +79,19 @@ char playerMove(int row, int col, int playerTurn) {
   }
 }
 
-//checks each col to see if there is a match
-int checkCol(int playerTurn) {
+//checks each col to see if there is a matching row/column
+int checkWin(int playerTurn) {
   int winStat = 0;
-  int count = 0;
-
-  if(playerTurn == 1) { //checking if player1 wins
-    //checks first col
-    for(int i = 0; i < 3; ++i) {
-      if(arr[i][0] == 'X') {
-        count++;
-      }
-      if(count >= 3) {
-        winStat = 1;
-      }
+  //check for a win in any row
+  for(int i = 0; i < 3; i++) {
+    if(arr[i][0]!= '' && arr[i][0] == arr[i][1] == arr[i][2]) {
+      return 1;
     }
-
-  count = 0; //reset count
-
-    //checks second col
-    for(int i = 0; i < 3; ++i) {
-      if(arr[i][1] == 'X') {
-        count++;
-      }
-      if(count >= 3) {
-        winStat = 1;
-      }
-    }
-
-  count = 0; //reset count
-
-    for(int i = 0; i < 3; ++i) {
-      if(arr[i][2] == 'X') {
-        count++;
-      }
-      if(count >= 3) {
-        winStat = 1;
-      }
-    }
-
-  } else if(playerTurn == 2) {
-    //checks first col
-    for(int i = 0; i < 3; ++i) {
-      if(arr[i][0] == 'O') {
-        count++;
-      }
-      if(count >= 3) {
-        winStat = 1;
-      }
-    }
-
-  count = 0; //reset count
-
-    //checks second col
-    for(int i = 0; i < 3; ++i) {
-      if(arr[i][1] == 'O') {
-        count++;
-      }
-      if(count >= 3) {
-        winStat = 1;
-      }
-    }
-
-  count = 0; //reset count
-
-    for(int i = 0; i < 3; ++i) {
-      if(arr[i][2] == 'O') {
-        count++;
-      }
-      if(count >= 3) {
-        winStat = 1;
-      }
-    }
-
+  }
+  for(int i = 0; i < 3; i++) {
+    if(arr[0][i] != '' && arr[0][i])
   }
 
-  return winStat;
-}
-
-
-//checks if there is a winner for the game
-// 1 = there is a winner/ 2 = no winner yet
-int winCheck(int playerTurn) {
-  int winStat = 0;
-  winStat = checkCol(playerTurn);
   return winStat;
 }
 
@@ -159,19 +99,26 @@ int winCheck(int playerTurn) {
 int main() {
   int playerTurn = 1;
   int row, col;
+  int inputs = 0;
 
   printf("Welcome to Tic-Tac-Toe\n");
   printf("======================\n");
-  display(playerTurn); //displays current board
+  displayPlayerTurn(playerTurn);
+  display(); //displays current board
 
-  do {
+  while(checkWin(playerTurn) != 1) {
     playerMove(row, col, playerTurn);
-    winCheck(playerTurn);
+    inputs++;
+    checkWin(playerTurn);
+    if(inputs == 9) {
+      printf("Cat's Game!\n");
+      display(playerTurn);
+      break;
+    }
     playerTurn = changeTurn(playerTurn);
-    display(playerTurn);
-    row = 0;
-    col = 0;
-  } while(winCheck(playerTurn) == 1);
-//  }
+    displayPlayerTurn(playerTurn);
+    display();
+  }
+
   return 0;
 }
