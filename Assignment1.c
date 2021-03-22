@@ -68,27 +68,110 @@ char playerMove(int row, int col, int playerTurn) {
   }
 }
 
+//checks each col to see if there is a match
+int checkCol(int playerTurn) {
+  int winStat = 0;
+  int count = 0;
+
+  if(playerTurn == 1) { //checking if player1 wins
+    //checks first col
+    for(int i = 0; i < 3; ++i) {
+      if(arr[i][0] == 'X') {
+        count++;
+      }
+      if(count >= 3) {
+        winStat = 1;
+      }
+    }
+
+  count = 0; //reset count
+
+    //checks second col
+    for(int i = 0; i < 3; ++i) {
+      if(arr[i][1] == 'X') {
+        count++;
+      }
+      if(count >= 3) {
+        winStat = 1;
+      }
+    }
+
+  count = 0; //reset count
+
+    for(int i = 0; i < 3; ++i) {
+      if(arr[i][2] == 'X') {
+        count++;
+      }
+      if(count >= 3) {
+        winStat = 1;
+      }
+    }
+
+  } else if(playerTurn == 2) {
+    //checks first col
+    for(int i = 0; i < 3; ++i) {
+      if(arr[i][0] == 'O') {
+        count++;
+      }
+      if(count >= 3) {
+        winStat = 1;
+      }
+    }
+
+  count = 0; //reset count
+
+    //checks second col
+    for(int i = 0; i < 3; ++i) {
+      if(arr[i][1] == 'O') {
+        count++;
+      }
+      if(count >= 3) {
+        winStat = 1;
+      }
+    }
+
+  count = 0; //reset count
+
+    for(int i = 0; i < 3; ++i) {
+      if(arr[i][2] == 'O') {
+        count++;
+      }
+      if(count >= 3) {
+        winStat = 1;
+      }
+    }
+
+  }
+
+  return winStat;
+}
+
 
 //checks if there is a winner for the game
 // 1 = there is a winner/ 2 = no winner yet
 int winCheck(int playerTurn) {
-  int bool = 2;
-  return bool;
+  int winStat = 0;
+  winStat = checkCol(playerTurn);
+  return winStat;
 }
 
 
 int main() {
   int playerTurn = 1;
   int row, col;
-  int bool = 0;
 
   printf("Welcome to Tic-Tac-Toe\n");
   printf("======================\n");
   display(playerTurn); //displays current board
 
+  do {
     playerMove(row, col, playerTurn);
+    winCheck(playerTurn);
     playerTurn = changeTurn(playerTurn);
     display(playerTurn);
+    row = 0;
+    col = 0;
+  } while(winCheck(playerTurn) == 1);
 //  }
   return 0;
 }
