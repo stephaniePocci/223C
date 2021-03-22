@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+char arr[3][3] = {' ',' ',' ',' ',' ',' ',' ',' ',' '}; //Declaring 2D array for new game, init to empty
 /*
 Instructions:
 Write a program that simulates Tic-Tac-Toe
@@ -21,7 +22,7 @@ P1 & P2 should use same code
 
 
 //function to display current board
-void display(int playerTurn, char arr[3][3]) {
+void display(int playerTurn) {
   if(playerTurn == 1) {
     printf("Player %d turn 'X'\n", playerTurn);
   } else if(playerTurn == 2) {
@@ -46,23 +47,31 @@ int changeTurn(int playerTurn) {
   return playerTurn;
 }
 
+//asks for the player's move
 //checks if the place is already taken
 //pseudo boolean function, (1 = illegal/ 2 = not illegal)
-int illegalMove(char arr[3][3], int row, int col){
-  int bool;
-  if(arr[row][col] == 'X' || arr[row][col] == 'O') {
-    bool = 1;
-    printf("Illegal Move.\n");
-  } else {
-    bool = 0;
+char playerMove(int row, int col, int playerTurn) {
+  do {
+    printf("Which Row would you like?\n");
+    scanf("%d", &row);
+    printf("Which Col would you like?\n");
+    scanf("%d", &col);
+    if(arr[row][col] != ' ') { //if the space is already taken
+      printf("Illegal Move\n");
+    }
+  } while(arr[row][col] != ' ');
+
+  if(playerTurn == 1) {
+    arr[row][col] = 'X';
+  } else if(playerTurn == 2) {
+    arr[row][col] = 'O';
   }
-  return bool;
 }
 
 
 //checks if there is a winner for the game
 // 1 = there is a winner/ 2 = no winner yet
-int winCheck(int playerTurn, char arr[3][3]) {
+int winCheck(int playerTurn) {
   int bool = 2;
   return bool;
 }
@@ -73,80 +82,13 @@ int main() {
   int row, col;
   int bool = 0;
 
-  char arr[3][3] = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}}; //Declaring 2D array for new game, init to empty
   printf("Welcome to Tic-Tac-Toe\n");
   printf("======================\n");
-  display(playerTurn, arr); //displays current board
+  display(playerTurn); //displays current board
 
-//  while(winCheck(playerTurn, arr) != 1)
-
-
-  printf("Which Row would you like?\n");
-  scanf("%d", &row);
-  printf("Which Col would you like?\n");
-  scanf("%d", &col);
- //checks first if spot is already taken
-
-bool = illegalMove(arr, row, col);
-  if(bool == 0) {
-    if(playerTurn == 1) {
-        arr[row][col] = 'X';
-      } else if(playerTurn == 2) {
-        arr[row][col] = 'O';
-      }
-  } else if(bool == 1) {
-    printf("Illegal Move.\n");
-  }
-
-
+    playerMove(row, col, playerTurn);
     playerTurn = changeTurn(playerTurn);
-    display(playerTurn, arr);
+    display(playerTurn);
 //  }
-//testing
-
-  printf("Which Row would you like?\n");
-  scanf("%d", &row);
-  printf("Which Col would you like?\n");
-  scanf("%d", &col);
- //checks first if spot is already taken
-
-bool = illegalMove(arr, row, col);
-  if(bool == 0) {
-    if(playerTurn == 1) {
-        arr[row][col] = 'X';
-      } else if(playerTurn == 2) {
-        arr[row][col] = 'O';
-      }
-  } else if(bool == 1) {
-    printf("Illegal Move.\n");
-  }
-
-
-    playerTurn = changeTurn(playerTurn);
-    display(playerTurn, arr);
-
-
-      printf("Which Row would you like?\n");
-      scanf("%d", &row);
-      printf("Which Col would you like?\n");
-      scanf("%d", &col);
-     //checks first if spot is already taken
-
-    bool = illegalMove(arr, row, col);
-      if(bool == 0) {
-        if(playerTurn == 1) {
-            arr[row][col] = 'X';
-          } else if(playerTurn == 2) {
-            arr[row][col] = 'O';
-          }
-      } else if(bool == 1) {
-        printf("Illegal Move.\n");
-      }
-
-
-        playerTurn = changeTurn(playerTurn);
-        display(playerTurn, arr);
-
-
   return 0;
 }
