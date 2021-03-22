@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-char arr[3][3] = {' ',' ',' ',' ',' ',' ',' ',' ',' '}; //Declaring 2D array for new game, init to empty
 /*
 Instructions:
 Write a program that simulates Tic-Tac-Toe
@@ -15,11 +14,7 @@ Initialize array to char of "blank space"
 P1 & P2 should use same code
 */
 
-//initialize gameplayer board
-// void createBoard() {
-//   char arr[3][3] = {{'X',' ',' '},{' ',' ',' '},{' ',' ',' '}}; //Declaring 2D array for new game
-// }
-
+// display the next player who is playing
 void displayPlayerTurn(int playerTurn) {
   if(playerTurn == 1) {
     printf("Player %d turn 'X'\n", playerTurn);
@@ -29,7 +24,7 @@ void displayPlayerTurn(int playerTurn) {
 }
 
 //function to display current board
-void display() {
+void display(char arr[3][3]) {
   for(int i = 0; i < 3; i++) {
     for(int j = 0; j < 3; j++) {
       printf("%c", arr[i][j]);
@@ -60,8 +55,8 @@ int changeTurn(int playerTurn) {
 
 //asks for the player's move
 //checks if the place is already taken
-//pseudo boolean function, (1 = illegal/ 2 = not illegal)
-char playerMove(int row, int col, int playerTurn) {
+//assigns new char value to location if it is empty
+char playerMove(int row, int col, int playerTurn, char arr[3][3]) {
   do {
     printf("Which Row would you like?\n");
     scanf("%d", &row);
@@ -79,8 +74,8 @@ char playerMove(int row, int col, int playerTurn) {
   }
 }
 
-//checks each col to see if there is a matching row/column
-int checkWin() {
+//function that checks for any win conditions within the array
+int checkWin(char arr[3][3]) {
   int winStat = 0;
   //check for a win in any row
   for(int i = 0; i < 3; i++) {
@@ -88,7 +83,7 @@ int checkWin() {
       return 1;
     }
   }
-  //check for a win in any col
+  //check for a win in any column
   for(int i = 0; i < 3; i++) {
     if(arr[0][i] != ' ' && arr[0][i] == arr[1][i] && arr[0][i] == arr[2][i]) {
       return 1;
@@ -108,36 +103,40 @@ int checkWin() {
 int main() {
   int playerTurn = 1;
   int row, col;
-  int inputs = 0;
-  int winStat = 0;
+  int inputs = 0; //variable to ensure there are not too many inputs (for Cat's Game)
+  char arr[3][3] = {' ',' ',' ',' ',' ',' ',' ',' ',' '}; //Declaring 2D array for new game, init to empty
 
   printf("Welcome to Tic-Tac-Toe\n");
   printf("======================\n");
-  displayPlayerTurn(playerTurn);
-  display(); //displays current board
+  displayPlayerTurn(playerTurn); //displays the current player's turn
+  display(arr); //displays current board
 
-  while(checkWin() != 1 || winStat != 1) {
-    playerMove(row, col, playerTurn);
+  while(checkWin(arr) != 1) {
+    playerMove(row, col, playerTurn, arr);
     inputs++;
-    winStat = checkWin();
-    if(inputs == 9) {
+    if(inputs == 9) { //if there are 9 inputs, the array is full - Cat's Game
       printf("Cat's Game!\n");
-      display(playerTurn);
-      break;
+      display(arr); //display the end game board
+      break; //exit the while loop
     }
-    playerTurn = changeTurn(playerTurn);
-    displayPlayerTurn(playerTurn);
-    display();
+    playerTurn = changeTurn(playerTurn); //switch to next player
+    displayPlayerTurn(playerTurn); //display who is playing next
+    display(arr);
   }
-
-playerTurn = changeTurn(playerTurn);
-  if(playerTurn == 1) {
-    printf("X Player Wins!\n");
-    display();
-  } else if(playerTurn == 2) {
-    printf("O Player Wins!\n");
-    display();
-  }
+  
+//check to make sure either "Cat's Game or ' ' Player Wins! is displayed
+if(checkWin(arr) == 1) { //If a player won
+  playerTurn = changeTurn(playerTurn);
+    if(playerTurn == 1) {
+      printf("X Player Wins!\n");
+      display(arr);
+    } else if(playerTurn == 2) {
+      printf("O Player Wins!\n");
+      display(arr);
+    }
+} else if(checkWin(arr) == 0) { //If it was a Cat's Game
+  return 0;
+}
 
   return 0;
 }
