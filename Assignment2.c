@@ -2,20 +2,6 @@
 #include <string.h>
 #define MAXLINE 1000
 
-// getline get a line store it in s - return the size of the read line
-int getline2(char s[], int lim) {
-  int c, i; //c is char , i is the counters
-  for(i = 0; i < lim-1 && (c = getchar()) != '\n'; ++i) {
-    s[i] = c;//write char to s
-    //input - hello\n
-    //s[] = hello\0
-  }
-  s[i] ='\0'; //append the null terminator
-  return i; //return the size
-}
-//function will search the input array for the term array
-//if we find the term, return the first index of the term within the array
-//if we dont find the term return -1 flag
 int strindex(char s[], char t[]) { //s input, t term
   int i, j, k;
 
@@ -34,7 +20,7 @@ int strindex(char s[], char t[]) { //s input, t term
 int main() {
   char search[MAXLINE]; // ??
   int choice = 0; // choice from the menu (Token)
-  FILE * fpointer = fopen("sample1.txt","w"); //creates file, or opens it if already created
+  FILE * fpointer = fopen("sample1.txt","r"); //creates file, or opens it if already created
 
   //main menu
   restart:
@@ -46,13 +32,28 @@ int main() {
 
   if(choice == 1) { //choice = food
     printf("Displaying Food\n");
-    char pattern[] = "Food:";
+    char token[] = "Food:";
+    while(fgets(search, MAXLINE, fpointer) != NULL) { //fgets reads line frome the text files and stores into str "search"
+      if(strindex(search, token) >= 0) {
+        printf("%s\n", search);
+      }
+    }
   } else if(choice == 2) { //choice = colors
     printf("Displaying Colors\n");
-    char pattern[] = "Colors:\n";
+    char token[] = "Colors:";
+    while(fgets(search, MAXLINE, fpointer) != NULL) { //fgets reads line frome the text files and stores into str "search"
+      if(strindex(search, token) >= 0) {
+        printf("%s\n", search);
+      }
+    }
   } else if(choice == 3) { //choice = people
     printf("Displaying People\n");
-    char pattern[] = "People:\n";
+    char token[] = "People:";
+    while(fgets(search, MAXLINE, fpointer) != NULL) { //fgets reads line frome the text files and stores into str "search"
+      if(strindex(search, token) >= 0) {
+        printf("%s\n", search);
+      }
+    }
   } else {
     printf("Invalid Token choice.\n");
     goto restart;
