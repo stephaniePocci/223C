@@ -29,29 +29,51 @@ int main() {
   printf("  2. Colors\n");
   printf("  3. People\n");
   scanf("%d", &choice);
+  printf("\n");
 
   if(choice == 1) { //choice = food
     printf("Displaying Food\n");
     char token[] = "Food:";
+    int length = strlen(token);
     while(fgets(search, MAXLINE, fpointer) != NULL) { //fgets reads line frome the text files and stores into str "search"
       if(strindex(search, token) >= 0) {
-        printf("%s\n", search);
+        for(int i = length + 1; i < strlen(search); i++) {
+          if(search[i] == ' ') {
+            printf("\n");
+          } else {
+            printf("%c", search[i]);
+          }
+        }
       }
     }
   } else if(choice == 2) { //choice = colors
     printf("Displaying Colors\n");
     char token[] = "Colors:";
+    int length = strlen(token);
     while(fgets(search, MAXLINE, fpointer) != NULL) { //fgets reads line frome the text files and stores into str "search"
       if(strindex(search, token) >= 0) {
-        printf("%s\n", search);
+        for(int i = length + 1; i < strlen(search); i++) {
+          if(search[i] == ' ') {
+            printf("\n");
+          } else {
+            printf("%c", search[i]);
+          }
+        }
       }
     }
   } else if(choice == 3) { //choice = people
     printf("Displaying People\n");
     char token[] = "People:";
+    int length = strlen(token);
     while(fgets(search, MAXLINE, fpointer) != NULL) { //fgets reads line frome the text files and stores into str "search"
       if(strindex(search, token) >= 0) {
-        printf("%s\n", search);
+        for(int i = length + 1; i < strlen(search); i++) {
+          if(search[i] == ' ') {
+            printf("\n");
+          } else {
+            printf("%c", search[i]);
+          }
+        }
       }
     }
   } else {
