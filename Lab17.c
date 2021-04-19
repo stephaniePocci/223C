@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
   char isValid = 'y';
   // y - is valid
   // n - not valid
-  int operator = 0;
+  int operator;
   // 1 - addition
   // 2 - subtraction
   // 0 - no operator
@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
     return 0;
   } else if(isValid == 'y') { //if the expression is valid
     for(int i = 2; i < argc; i++) {
+      operator = 0;
       if(strcmp("+", argv[i]) == 0) {
         operator = 1; //set to addition
       } else if(strcmp("-", argv[i]) == 0) {
