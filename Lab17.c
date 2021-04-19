@@ -2,7 +2,8 @@
 #include <string.h>
 
 int atoi(char s[]) { //will convert string/char to int
-  int i,n = 0;
+  int i;
+  int n = 0;
   for (i = 0; s[i] >= '0' && s[i] <= '9'; ++i) {
     n = 10 * n + (s[i] - '0');
   }
@@ -10,15 +11,13 @@ int atoi(char s[]) { //will convert string/char to int
 }
 
 int main(int argc, char *argv[]) {
-  printf("Please enter the expression:\n");
-  scanf("%s", &argv[]);
   char isValid = 'y';
   // y - is valid
   // n - not valid
-  char operator = 'n';
-  // a - addition
-  // s - subtraction
-  // n - no operator
+  int operator = 0;
+  // 1 - addition
+  // 2 - subtraction
+  // 0 - no operator
   int sum = atoi(argv[1]); //sum of expression
   // first num
 
@@ -44,25 +43,24 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  //if the expression is not valid
-  if(isValid == 'n') {
+  if(isValid == 'n') {   //if the expression is not valid
     printf("Expression is invalid.\n");
     return 0;
   } else if(isValid == 'y') { //if the expression is valid
     for(int i = 2; i < argc; i++) {
       if(strcmp("+", argv[i]) == 0) {
-        operator = 'a'; //set to addition
+        operator = 1; //set to addition
       } else if(strcmp("-", argv[i]) == 0) {
-        operator = 's'; //set to subtraction
+        operator = 2; //set to subtraction
       }
 
       //checks if there is an operator
-      if(operator == 'n') {
+      if(operator != 0) {
         switch(operator) {
-          case 'a': //ADDITION
+          case 1: //ADDITION
             sum += atoi(argv[i+1]);
             break;
-          case 's': //SUBTRACTION
+          case 2: //SUBTRACTION
             sum -= atoi(argv[i+1]);
             break;
         }
