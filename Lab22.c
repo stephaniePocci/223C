@@ -2,7 +2,7 @@
 #include <string.h>
 
 typedef int(*Student)(int num);
-typedef float(*Student1)(float num1);
+typedef float(*Student1)(float num);
 typedef char*(*Student2)(char name[]);
 
 struct Student {
@@ -23,7 +23,8 @@ struct Student {
   printf("Age: %d\n", std.age);
 }
 
-int set_age(int age) {
+//setter functions
+int setAge(int age) {
   return age;
 }
 
@@ -43,7 +44,7 @@ char* setName(char name[]) {
 int main(int argc , char **argv) {
 
   char newName[20];
-  int intNum1;
+  int num;
   float newGPA;
   struct Student std1; // create struct type Student
 
@@ -52,17 +53,17 @@ int main(int argc , char **argv) {
   std1.CWID = 1337;
   std1.GPA = 3.7;
   std1.age = 14;
-  printStudent(std1);
+  printStudent(std1); //prints the default data
 
-  printf("\nEnter a Name: ");
+  printf("\nEnter a name: ");
   scanf("%s",newName);
   std1.ptr2 = setName;
   strcpy(std1.name, std1.ptr2(newName));
 
   printf("Enter a CWID: ");
-  scanf("%d",&intNum1);
+  scanf("%d",&num);
   std1.ptr = setCWID;
-  std1.CWID = std1.ptr(intNum1);
+  std1.CWID = std1.ptr(num);
 
   printf("Enter the GPA: ");
   scanf("%f",&newGPA);
@@ -71,9 +72,9 @@ int main(int argc , char **argv) {
   std1.GPA = std1.ptr1(newGPA);
 
   printf("Enter a age: ");
-  scanf("%d",&intNum1);
-  std1.ptr = set_age;
-  std1.age = std1.ptr(intNum1);
+  scanf("%d",&num);
+  std1.ptr = setAge;
+  std1.age = std1.ptr(num);
   printStudent(std1);
 
   return 0;
